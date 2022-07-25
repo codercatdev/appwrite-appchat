@@ -81,6 +81,7 @@ const App: React.FC = () => {
     if(session && window.location.pathname !== '/chat'){
       window.location.replace('/chat');
     }
+    console.log('session', session)
   }, [session])
   
 

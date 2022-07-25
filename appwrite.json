@@ -1,0 +1,42 @@
+{
+    "projectId": "",
+    "projectName": "",
+    "collections": [
+        {
+            "$id": "chat",
+            "$createdAt": 1658785818,
+            "$updatedAt": 1658787033,
+            "$read": [
+                "role:member"
+            ],
+            "$write": [
+                "role:member"
+            ],
+            "databaseId": "default",
+            "name": "chat",
+            "enabled": true,
+            "permission": "collection",
+            "attributes": [
+                {
+                    "key": "user",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "message",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 27,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ]
+}

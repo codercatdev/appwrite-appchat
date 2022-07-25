@@ -8,7 +8,7 @@ import {useApi} from '../../providers/api';
 import { useHistory } from 'react-router';
 
 
-const MSG_ID = '629a1c77e7581b2f7087';
+const COLLECTION_ID = 'chat';
 
 const _Buffer = ({messages, lastRef}) => (
     <IonList>
@@ -57,17 +57,16 @@ const Component = ({session, setSession}) => {
     try {
       const pending = {
         user,
-        message: msg,
-        created: new Date().toISOString(),
+        message: msg
       };
 
-      await api.database.createDocument(MSG_ID, 'unique()', pending);
+      await api.database.createDocument(COLLECTION_ID, 'unique()', pending);
     } catch (err) {
       console.log(err);
     }
   }
   
-  api.client.subscribe(`databases.default.collections.${MSG_ID}.documents`, res => {
+  api.client.subscribe(`databases.default.collections.${COLLECTION_ID}.documents`, res => {
     const {name, message} = (res.payload as {name: string, message: string});
     console.log(res)
     setMessages([
@@ -81,7 +80,7 @@ const Component = ({session, setSession}) => {
 
   
   const getMessages = async () => {
-    const list = await api.database.listDocuments(MSG_ID, [], 100, 0, undefined, undefined, [], ['ASC']);
+    const list = await api.database.listDocuments(COLLECTION_ID, [], 100, 0, undefined, undefined, [], ['ASC']);
     
 
     setMessages(

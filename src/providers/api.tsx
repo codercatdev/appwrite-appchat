@@ -1,8 +1,8 @@
 import React from 'react';
 import { Account, Avatars, Client, Databases } from 'appwrite';
 
-const PROJECT_ID = '629a0fbe3bd88e6547a9';
-const ENDPOINT = 'https://demo.appwrite.io/v1';
+const PROJECT_ID = '62df0c6ad480b277a643'; //Update this to your project
+const ENDPOINT = 'http://localhost/v1';
 const APP_DATABASE_ID = "default";
 
 
