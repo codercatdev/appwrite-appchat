@@ -37,7 +37,7 @@ const Component = ({session, setSession}) => {
 
   const logout = async () => {
     try {
-      await api.account.deleteSession(session);
+      await api.account.deleteSession(session.$id);
       setUser(null);
       setSession(null);
     } catch (_) {

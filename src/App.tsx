@@ -44,12 +44,11 @@ setupIonicReact();
 const Router = () => (
   <IonReactRouter>
     <Session.Consumer>
-      {({session}) => {
-        console.log(session)
+      {({session, setSession}) => {
       return (
         <>
           <Route path="/onboarding/" component={Onboarding} />
-          <Route exact path="/chat" component={Chat} />
+          <Route exact path="/chat" render={(props) => <Chat {...props} session={session} setSession={setSession} /> } />
       
           <Route exact path="/">
             <Redirect to={session ? "/chat" : "/onboarding"} />
@@ -86,7 +85,7 @@ const App: React.FC = () => {
     <Provider>
       <IonApp>
         <Session.Provider value={{session, setSession}}>
-          {session && <Router />}
+          {<Router />}
         </Session.Provider>
       </IonApp>
     </Provider>
