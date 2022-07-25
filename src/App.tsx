@@ -76,6 +76,14 @@ const App: React.FC = () => {
     loadSession();
   }, []);
 
+  // This is terrible but I can't get the route to reload
+  React.useEffect(() => {
+    if(session && window.location.pathname !== '/chat'){
+      window.location.replace('/chat');
+    }
+  }, [session])
+  
+
 
   const setSession = (session:SessionModel|null) => { 
     _setSession(session);

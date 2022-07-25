@@ -5,6 +5,7 @@ import Message from '../../components/Message';
 import './styles.css';
 
 import {useApi} from '../../providers/api';
+import { useHistory } from 'react-router';
 
 
 const MSG_ID = '629a1c77e7581b2f7087';
@@ -24,6 +25,7 @@ const Component = ({session, setSession}) => {
   let [user, setUser] = React.useState<string>(null);
   let [messages, setMessages] = React.useState([]);
   let api = useApi();
+  const history = useHistory();
 
   const getUser = async () => {
     try {
@@ -37,12 +39,15 @@ const Component = ({session, setSession}) => {
 
   const logout = async () => {
     try {
-      await api.account.deleteSession(session.$id);
+      await api.account.deleteSession('current');
       setUser(null);
       setSession(null);
+      history.replace('/');
     } catch (_) {
+      console.log(_)
       setUser(null);
       setSession(null);
+      history.replace('/');
     }
   }
 
@@ -103,8 +108,7 @@ const Component = ({session, setSession}) => {
         lastRef.current.scrollIntoView({behavior: 'smooth'});
 
     })(getUser, messages, getMessages, lastRef);
-  });
-
+  }, []);
 
   return (
     <IonPage>

@@ -28,37 +28,35 @@ import {
 import './styles.css';
 
 import {useApi} from '../../providers/api';
-import Session from '../../providers/session';
+import {default as SessionModel} from '../../data/session';
 
 import {
   object,
   string
 } from 'yup';
+import { History} from 'history';
 
 const validation = object().shape({
   email: string().email('Invalid email').required('Email is required'),
   password: string().required('Password is required')
 });
 
-const Component = ({history, setSession}) => {
+const Component = ({setSession, history}:{setSession: (session: SessionModel | null) => void, history:History}) => {
   const api = useApi();
   const [email, setEmail] = React.useState<string>();
   const [password, setPassword] = React.useState<string>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
     try {
       await validation.validate({email, password});
       
       const response = await api.account.createEmailSession(email, password);
       await setSession(response);
-
-      history.push('/chat');
     } catch (err) {
       console.log('Invalid data', err);
 
-      alert(`Invalid data: ${JSON.stringify(err.errors)}`);
+      alert(`Did you register?`);
     }
   };
 
